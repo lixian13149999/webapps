@@ -30,6 +30,7 @@
 
 
 <body>
+	<a id="hide_a_link_id" class="hide" href="/proj">支付成功后返回的页面</a>
 	<!-- <div id="wechat_login_msg">
 		将要
 	</div> -->
@@ -84,6 +85,7 @@
 				/* alert(res.err_code + res.err_desc);
 				alert(res.err_msg); */
 				if (res.err_msg == "get_brand_wcpay_request:ok") {
+					document.getElementById("hide_a_link_id").click();
 					imessenger.success("付款成功");
 				} else if (res.err_msg === 'get_brand_wcpay_request:cancel') {
 					imessenger.success("取消支付");

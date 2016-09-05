@@ -37,6 +37,15 @@
         <!-- 实例化后是否立即执行 -->
         <!-- <property name="concurrent" value="false" /> -->
     </bean>
+    <!--用来查看项目是否超过众筹时间,超过的直接设为已失败-->
+    <bean id="checkProjAndSetFalse" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <!-- 执行的类(映射) -->
+        <property name="targetObject" ref="OrderSettime" />
+        <!-- 执行的方法 -->
+        <property name="targetMethod" value="checkProjAndSetFalse" />
+        <!-- 实例化后是否立即执行 -->
+        <!-- <property name="concurrent" value="false" /> -->
+    </bean>
 
     <!-- 获取accessToken的定时器的执行时间配置 -->
     <bean id="refreshAccessTokenSettime" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
@@ -68,6 +77,16 @@
         <!-- 每隔两小时执行一次 -->
         <property name="repeatInterval" value="300000" />
     </bean>
+    <!-- 用来查看项目是否超过众筹时间,超过的直接设为已失败 -->
+    <bean id="checkProjAndSetFalseSettime" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+        <!-- see the example of method invoking job above -->
+        <!-- 映射执行的方法 -->
+        <property name="jobDetail" ref="checkProjAndSetFalse" />
+        <!-- 首次执行的时候推辞5分钟时间(时间均已毫秒计算) -->
+        <property name="startDelay" value="300000" />
+        <!-- 每隔两小时执行一次 -->
+        <property name="repeatInterval" value="7200000" />
+    </bean>
 
     <!-- 总调度用于启动Spring定时器 -->
     <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
@@ -76,6 +95,7 @@
                 <ref bean="refreshAccessTokenSettime" />
                 <ref bean="refreshMaterialSettime" />
                 <ref bean="backOrderSettime" />
+                <ref bean="checkProjAndSetFalseSettime" />
             </list>
         </property>
     </bean>

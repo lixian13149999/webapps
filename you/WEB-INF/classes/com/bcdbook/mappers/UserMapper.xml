@@ -208,10 +208,10 @@
 	 <!-- 12.统计按照当分页大小查询的发起项目者的总页数数-->	
 		<select id="countFUserPage" resultType="int">
 		select
-			ceil(count(t_user.id)/#{pageSize})
+			ceil(count(distinct t_user.id)/#{pageSize})
 		from t_user join t_user_proj ON t_user.id=t_user_proj.user_id
 		where t_user.tag=1 AND
-		 t_user_proj.reason=1 group by t_user.id limit
+		 t_user_proj.reason=1  
 	</select>
 	
 	
@@ -228,10 +228,10 @@
 	 <!-- 14.统计按照当分页大小查询支持项目者的总页数-->	
 		<select id="countZUserPage" resultType="int">
 		select
-			ceil(count(t_user.id)/#{pageSize})
+			ceil(count(distinct t_user.id)/#{pageSize})
 		from t_user join t_user_proj ON t_user.id=t_user_proj.user_id
 		where t_user.tag=1 AND
-		 t_user_proj.reason=2 group by t_user.id 
+		 t_user_proj.reason=2  
 	</select>
 	
    

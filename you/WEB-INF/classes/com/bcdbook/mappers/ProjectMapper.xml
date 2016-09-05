@@ -534,6 +534,25 @@
 		 where tag=1 AND
 		      type=3	
 	</select>	
-    
 	
+	
+    <!--  29.把众筹超过30天的项目设为众筹失败-->
+    <select id="selectProjOver30" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List0" />
+		from t_project
+		where tag=1 AND
+		      state=3 AND  
+		      type=1 AND 
+		(UNIX_TIMESTAMP(NOW())-CAST(LEFT(start_time,10) AS UNSIGNED))/60/60/24>30	
+	</select>    
+	
+	<!--  30.	根据id把项目设为众筹失败-->	
+	<update id="setProjFailedById">
+	update t_project
+    <set>
+     type=3	  
+	  </set>  		
+	where id =#{projId}	
+	</update>
 </mapper>
