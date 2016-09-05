@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- 设置映射的dao类 -->
+<mapper namespace="com.bcdbook.fund.dao.FundDao">
+
+	<!-- 设置映射的数据模型 -->
+	<resultMap id="BaseResultMap" type="com.bcdbook.fund.pojo.Fund">
+		<id column="id" property="id" jdbcType="INTEGER" />
+	    <result column="fund_number" property="fundNumber" jdbcType="VARCHAR" />		
+		<result column="user_id" property="userId" jdbcType="INTEGER" />
+		<result column="proj_id" property="projId" jdbcType="INTEGER" />
+		<result column="name" property="projName" jdbcType="VARCHAR" />
+		<result column="type" property="type" jdbcType="INTEGER" />
+		<result column="direction" property="direction" jdbcType="INTEGER" />
+		<result column="sum_money" property="sumMoney" jdbcType="INTEGER" />
+		<result column="create_time" property="createTime" jdbcType="VARCHAR" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />		
+	</resultMap>	
+	<!-- 定义查询的所有参数 -->
+	<sql id="Base_Column_List">
+		t_fund.id as id,fund_number,user_id, proj_id,name,t_fund.type as type,direction,sum_money,t_fund.create_time as create_time,remark
+	</sql>
+	
+		<!--1. 增加一条资金流记录 -->
+	<insert id="insert" parameterType="com.bcdbook.fund.pojo.Fund">
+		insert into t_fund (id,fund_number,user_id, proj_id,type,direction,sum_money,create_time,remark)
+		values (#{id,jdbcType=INTEGER},
+		#{fundNumber,jdbcType=VARCHAR},
+		#{userId,jdbcType=INTEGER},
+		#{projId,jdbcType=INTEGER},		
+		#{type,jdbcType=INTEGER},		
+		#{direction,jdbcType=INTEGER},
+		#{sumMoney,jdbcType=INTEGER},
+		#{createTime,jdbcType=VARCHAR},
+		#{remark,jdbcType=VARCHAR})	
+	</insert>	
+	
+	<!--  2.根据userId查询该用户所有资金流的集合-->
+		<select id="listFundByUserId" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_fund JOIN t_project ON t_fund.proj_id=t_project.id
+		where user_id = #{userId,jdbcType=INTEGER} 	
+	</select> 
+	
+</mapper>

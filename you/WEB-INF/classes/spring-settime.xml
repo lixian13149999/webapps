@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+                        http://www.springframework.org/schema/beans/spring-beans.xsd">
+   
+    <!-- 定时器的相关配置 -->
+    <!-- 定义处理业务的类 -->
+    <bean id="WechatSettime" class="com.bcdbook.util.settime.WechatSettime" />
+    <bean id="OrderSettime" class="com.bcdbook.util.settime.OrderSettime" />
+
+    <!-- 配置所执行的方法的细节 -->
+    <!-- 微信用来获取accessToken的定时器执行细节 -->
+    <bean id="refreshAccessToken" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <!-- 执行的类(映射) -->
+        <property name="targetObject" ref="WechatSettime" />
+        <!-- 执行的方法 -->
+        <property name="targetMethod" value="refreshAccessToken" />
+        <!-- 实例化后是否立即执行 -->
+        <property name="concurrent" value="false" />
+    </bean>
+    <!-- 微信用来刷新素材的定时器执行细节 -->
+    <bean id="refreshMaterial" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <!-- 执行的类(映射) -->
+        <property name="targetObject" ref="WechatSettime" />
+        <!-- 执行的方法 -->
+        <property name="targetMethod" value="refreshMaterial" />
+        <!-- 实例化后是否立即执行 -->
+        <property name="concurrent" value="false" />
+    </bean>
+    <!--用来回退未支付订单的定时器-->
+    <bean id="backOrder" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <!-- 执行的类(映射) -->
+        <property name="targetObject" ref="OrderSettime" />
+        <!-- 执行的方法 -->
+        <property name="targetMethod" value="backOrder" />
+        <!-- 实例化后是否立即执行 -->
+        <!-- <property name="concurrent" value="false" /> -->
+    </bean>
+
+    <!-- 获取accessToken的定时器的执行时间配置 -->
+    <bean id="refreshAccessTokenSettime" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+        <!-- see the example of method invoking job above -->
+        <!-- 映射执行的方法 -->
+        <property name="jobDetail" ref="refreshAccessToken" />
+        <!-- 10 seconds -->
+        <!-- 首次执行的时候推辞的时间(时间均已毫秒计算) -->
+        <!-- 每隔15分钟执行一次 -->
+        <property name="repeatInterval" value="900000" />
+    </bean>
+    <!-- 刷新素材的定时器的执行时间配置 -->
+    <bean id="refreshMaterialSettime" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+        <!-- see the example of method invoking job above -->
+        <!-- 映射执行的方法 -->
+        <property name="jobDetail" ref="refreshMaterial" />
+        <!-- 首次执行的时候推辞5分钟时间(时间均已毫秒计算) -->
+        <property name="startDelay" value="300000" />
+        <!-- 每隔两小时执行一次 -->
+        <property name="repeatInterval" value="7200000" />
+    </bean>
+    <!-- 刷新素材的定时器的执行时间配置 -->
+    <bean id="backOrderSettime" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+        <!-- see the example of method invoking job above -->
+        <!-- 映射执行的方法 -->
+        <property name="jobDetail" ref="backOrder" />
+        <!-- 首次执行的时候推辞5分钟时间(时间均已毫秒计算) -->
+        <!-- <property name="startDelay" value="1000" /> -->
+        <!-- 每隔两小时执行一次 -->
+        <property name="repeatInterval" value="300000" />
+    </bean>
+
+    <!-- 总调度用于启动Spring定时器 -->
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="refreshAccessTokenSettime" />
+                <ref bean="refreshMaterialSettime" />
+                <ref bean="backOrderSettime" />
+            </list>
+        </property>
+    </bean>
+</beans>

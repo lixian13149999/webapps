@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- 设置映射的dao类 -->
+<mapper namespace="com.bcdbook.cash.dao.CashDao">
+	    <resultMap id="BaseResultMap" type="com.bcdbook.cash.pojo.Cash">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="user_id" property="userId" jdbcType="INTEGER" />
+	    <result column="nickname" property="nickname" jdbcType="VARCHAR" />			
+		<result column="cash_amount" property="cashAmount" jdbcType="INTEGER" />
+		 <result column="create_time" property="createTime" jdbcType="VARCHAR" />		
+		<result column="approve" property="approve" jdbcType="INTEGER" />
+		<result column="approve_time" property="approveTime" jdbcType="VARCHAR" />
+		 <result column="admin_confirm" property="adminConfirm" jdbcType="INTEGER" />	    		
+		<result column="admin_confirm_time" property="adminConfirmTime" jdbcType="VARCHAR" />		
+		<result column="user_confirm" property="userConfirm" jdbcType="INTEGER" />	    		
+		<result column="user_confirm_time" property="userConfirmTime" jdbcType="VARCHAR" />		
+		<result column="remark" property="remark" jdbcType="VARCHAR" />		
+	</resultMap>	
+	<!-- 1.定义查询的所有参数 -->
+	<sql id="Base_Column_List">
+		id, user_id,cash_amount,create_time,approve,approve_time,admin_confirm,admin_confirm_time,user_confirm,user_confirm_time,remark
+	</sql>	
+	
+	<sql id="Base_Column_List0">
+		t_cash.id as id, user_id,nickname,cash_amount,FROM_UNIXTIME(LEFT(create_time,10),"%Y-%m-%d") as create_time,approve,approve_time,admin_confirm,admin_confirm_time,user_confirm,user_confirm_time,remark
+	</sql>		
+	
+		<!-- 1.增加一条地址记录 -->
+	<insert id="addCashApply" parameterType="com.bcdbook.cash.pojo.Cash">
+		insert into t_cash (user_id,cash_amount,create_time,approve,approve_time,admin_confirm,admin_confirm_time,user_confirm,user_confirm_time,remark)
+		values (#{userId,jdbcType=INTEGER},
+		#{cashAmount,jdbcType=INTEGER},
+		#{createTime,jdbcType=VARCHAR},
+		#{approve,jdbcType=INTEGER},
+		#{approveTime,jdbcType=VARCHAR},		
+		#{adminConfirm,jdbcType=INTEGER},
+		#{adminConfirmTime,jdbcType=VARCHAR},		
+		#{userConfirm,jdbcType=INTEGER},
+		#{userConfirmTime,jdbcType=VARCHAR},		
+		#{remark,jdbcType=VARCHAR})		
+	</insert>	
+	<!--2根据体现条件查询体现申请（1.体现申请是否通过审核2.管理员是否确定打款3.用户是否确定收到款项）分页查询符合条件的提现申请-->
+	
+	<select id="getCashListByCondition" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List0" />
+		from t_cash  JOIN t_user on t_cash.user_id=t_user.id
+		where 1=1
+		<if test="approve!=0">
+		  AND  approve = #{approve,jdbcType=INTEGER}
+		</if>
+		<if test="adminConfirm!=0">
+		  AND  admin_confirm = #{adminConfirm,jdbcType=INTEGER}  	
+		</if>
+		<if test="userConfirm!=0">
+		  AND  user_confirm = #{userConfirm,jdbcType=INTEGER}
+		</if>
+		      limit #{startPage},#{pageSize}	
+		</select>
+				
+	<!-- .3根据体现条件查询体现申请（1.体现申请是否通过审核2.管理员是否确定打款3.用户是否确定收到款项）分页查询符合条件的提现申请的分页总数-->	
+		<select id="countCashByConditionPage" resultType="int">
+		select
+			ceil(count(t_cash.id)/#{pageSize})
+		from t_cash
+		where 1=1	
+		<if test="approve!=0">
+		  AND  approve = #{approve,jdbcType=INTEGER}
+		</if>
+		<if test="adminConfirm!=0">
+		  AND  admin_confirm = #{adminConfirm,jdbcType=INTEGER}  	
+		</if>
+		<if test="userConfirm!=0">
+		  AND  user_confirm = #{userConfirm,jdbcType=INTEGER}
+		</if>
+	</select>
+	
+	
+		<!--4.管理员批准申请-->
+	<update id="approveCashApply">
+	update t_cash
+	set approve=1		
+	where id =#{cashId,jdbcType=INTEGER}
+	
+    </update>
+    
+    	<!--5.管理员确认申请已打款 -->
+	<update id="coinfirmCashApply">
+	update t_cash
+   set	admin_confirm=1
+	where id =#{cashId,jdbcType=INTEGER}
+	
+    </update>
+		     
+</mapper>
+
+

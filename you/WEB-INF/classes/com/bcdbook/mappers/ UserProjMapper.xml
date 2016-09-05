@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- 设置映射的dao类 -->
+<mapper namespace="com.bcdbook.user.dao.UserProjDao">   
+	<!-- 设置映射的数据模型 -->
+	<resultMap id="BaseResultMap" type="com.bcdbook.user.pojo.UserProj">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="user_id" property="userId" jdbcType="INTEGER" />
+		<result column="proj_id" property="projId" jdbcType="INTEGER" />
+		<result column="reason" property="reason" jdbcType="INTEGER" />
+		<result column="has_collect" property="hasCollect" jdbcType="INTEGER" />
+		<result column="create_time" property="createTime" jdbcType="VARCHAR" />	
+	</resultMap>
+	
+	<!-- 定义查询的所有参数 -->
+	<sql id="Base_Column_List">
+		id, user_id, proj_id,reason,has_collect,create_time
+	</sql>
+	<!-- 1添加一条用户和项目关系的数据 -->	
+	<insert id="insert" parameterType="com.bcdbook.user.pojo.UserProj">
+		insert into t_user_proj (id, user_id, proj_id,reason,has_collect,create_time)
+		values (#{id,jdbcType=INTEGER},
+		#{userId,jdbcType=INTEGER},
+		#{projId,jdbcType=INTEGER},		
+		#{reason,jdbcType=INTEGER},						
+		#{hasCollect,jdbcType=INTEGER},
+		#{createTime,jdbcType=VARCHAR})
+	</insert>
+	
+	<!-- 2根据用户id和项目id获取一条用户和项目之间的关系数据 -->
+	<select id="get" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_user_proj
+		where user_id = #{userId,jdbcType=INTEGER} AND
+		proj_id = #{projId,jdbcType=INTEGER}
+	</select>
+	
+	<!-- 3根据传入的userid和proj,把此项目设置成收藏-->
+	<update id="collect" >
+		update t_user_proj
+		set
+		has_collect =1			
+		where user_id =#{userId,jdbcType=INTEGER} AND
+	 	proj_id =#{projId,jdbcType=INTEGER}
+	</update>
+	
+		
+	<!--4根据传入的userid和proj,把此项目设置成收藏取消收藏-->
+	<update id="uncollect" >
+		update t_user_proj
+		set
+		has_collect =2			
+		where user_id =#{userId,jdbcType=INTEGER} AND
+	 	proj_id =#{projId,jdbcType=INTEGER}
+	</update>
+	
+	
+	
+	<!--5跟新项目和用户关系 -->
+	<update id="update">
+	update t_user_proj
+
+	<set>
+		<if test="userProj.userId != null">
+			user_id = #{userProj.userId,jdbcType=INTEGER},
+		</if>		
+		
+		<if test="userProj.projId != null">
+			proj_id = #{userProj.projId,jdbcType=VARCHAR},
+		</if>
+		<if test="userProj.reason != null">
+			reason = #{userProj.reason,jdbcType=INTEGER},
+		</if>
+		<if test="userProj.hasCollect != null">
+			has_collect = #{userProj.hasCollect,jdbcType=VARCHAR},
+		</if>
+		<if test="userProj.createTime != null">
+			create_time = #{userProj.createTime,jdbcType=VARCHAR},
+		</if>		
+		</set>
+	where id =
+	#{userProj.id,jdbcType=INTEGER}
+</update>
+
+</mapper>
+
+

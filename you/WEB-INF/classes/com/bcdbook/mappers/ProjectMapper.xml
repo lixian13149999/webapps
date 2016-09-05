@@ -1,0 +1,530 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- 设置映射的dao类 -->
+<mapper namespace="com.bcdbook.project.dao.ProjectDao">
+
+	<!-- 设置映射的数据模型 -->
+
+	<resultMap id="BaseResultMap" type="com.bcdbook.project.pojo.Project">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="tag" property="tag" jdbcType="INTEGER" />
+		<result column="state" property="state" jdbcType="INTEGER" />
+		<result column="type" property="type" jdbcType="INTEGER" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="proj_describe" property="projDescribe" jdbcType="VARCHAR" />
+		<result column="des_img" property="desImg" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="VARCHAR" />
+		<result column="start_time" property="startTime" jdbcType="VARCHAR" />
+		<result column="cycle" property="cycle" jdbcType="INTEGER" />
+		<result column="end_time" property="endTime" jdbcType="VARCHAR" />
+		<result column="target_money" property="targetMoney" jdbcType="INTEGER" />
+		<result column="finish_money" property="finishMoney" jdbcType="INTEGER" />
+		<result column="sell_stock" property="sellStock" jdbcType="INTEGER" />
+		<result column="count_product" property="countProduct" jdbcType="INTEGER" />
+		<result column="unit_price" property="unitPrice" jdbcType="DOUBLE" />
+		<result column="repay_explain" property="repayExplain" jdbcType="VARCHAR" />
+		<result column="id_card" property="idCard" jdbcType="VARCHAR" />
+		<result column="wechat_dimen" property="wechatDimen" jdbcType="VARCHAR" />
+		<result column="warning" property="warning" jdbcType="VARCHAR" />
+		<result column="founder_img" property="founderImg" jdbcType="VARCHAR" />
+		<result column="founder_des" property="founderDes" jdbcType="VARCHAR" />
+	    <result column="recommend" property="recommend" jdbcType="INTEGER" />		
+	</resultMap>
+	
+	<!-- 1.定义查询的所有参数(project一一般情况使用) -->
+	
+	<sql id="Base_Column_List">
+		id,tag,state,type,name,proj_describe,des_img,create_time,start_time,cycle,end_time,target_money,finish_money,
+		sell_stock,count_product,repay_explain,id_card,wechat_dimen,warning,founder_img,founder_des,unit_price,recommend
+    </sql>	
+    
+    <!-- 2定义查询的所有参数(project一把查到的添加时间用特定格式显示用于后台管理的前端显示) -->
+	
+	<sql id="Base_Column_List0">
+		id,tag,state,type,name,proj_describe,des_img,FROM_UNIXTIME(LEFT(create_time,10),"%Y-%m-%d") as create_time,start_time,cycle,end_time,target_money,finish_money,
+		sell_stock,count_product,repay_explain,id_card,wechat_dimen,warning,founder_img,founder_des,unit_price,recommend
+    </sql>	
+		
+	<!-- 设置UserProject DTO映射的数据模型 -->	
+	<resultMap id="UserProjectMap" type="com.bcdbook.pojo.UserProject">	
+	    <result column="username" property="username" jdbcType="VARCHAR" />	    
+	    <result column="nickname" property="nickname" jdbcType="VARCHAR" />	 	    
+		<result column="last_login_time" property="lastLoginTime" jdbcType="VARCHAR" />
+		<result column="create_code_time" property="createCodeTime" jdbcType="VARCHAR" />
+		<result column="photo" property="photo" jdbcType="VARCHAR" />		
+		<result column="project_id" property="projectId" jdbcType="INTEGER" />
+		<result column="user_id" property="userId" jdbcType="INTEGER" />
+		<result column="state" property="state" jdbcType="INTEGER" />
+	    <result column="type" property="type" jdbcType="INTEGER" />		
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="proj_describe" property="projDescribe" jdbcType="VARCHAR" />
+		<result column="des_img" property="desImg" jdbcType="VARCHAR" />
+		<result column="founder_img" property="founderImg" jdbcType="VARCHAR" />
+		<result column="start_time" property="startTime" jdbcType="VARCHAR" />
+		<result column="target_money" property="targetMoney" jdbcType="INTEGER" />
+		<result column="finish_money" property="finishMoney" jdbcType="INTEGER" />
+		<result column="unit_price" property="unitPrice" jdbcType="DOUBLE" />
+		<result column="count_product" property="countProduct" jdbcType="INTEGER" />
+		<result column="repay_explain" property="repayExplain" jdbcType="VARCHAR" />
+		<result column="id_card" property="idCard" jdbcType="VARCHAR" />
+		<result column="wechat_dimen" property="wechatDimen" jdbcType="VARCHAR" />
+		<result column="warning" property="warning" jdbcType="VARCHAR" />
+		<result column="reason" property="reason" jdbcType="INTEGER" />
+		<result column="has_collect" property="hasCollect" jdbcType="INTEGER" />
+		<result column="founder_des" property="founderDes" jdbcType="VARCHAR" />
+		 <result column="recommend" property="recommend" jdbcType="INTEGER" />
+	</resultMap>
+	
+	<!-- 定义查询的所有参数 -->
+	
+	<sql id="UserProject_Column_List">
+		username,nickname,last_login_time,create_code_time,photo,t_project.id as project_id,t_user.id as user_id,
+		state,type,name,proj_describe,des_img,founder_img,start_time,target_money,finish_money,count_product,unit_price,repay_explain,
+		id_card,wechat_dimen,warning,reason,has_collect,founder_des,recommend	  
+	</sql>
+	
+	<!-- 1.根据条件分页查询需要的项目和对应的用户信息:tag=1.正常,type=1.众筹进行中,state=3.审核通过    排序:添加时间-->
+	
+	<select id="listProj" resultMap="UserProjectMap">
+		select
+		<include refid="UserProject_Column_List" />
+		from t_project 
+		join t_user_proj on t_project.id=t_user_proj.proj_id join
+		t_user on t_user.id=t_user_proj.user_id		
+		where t_user_proj.reason=1 AND
+		 t_project.tag = #{tag,jdbcType=INTEGER} AND
+		state = #{state,jdbcType=INTEGER} AND
+		type = #{type,jdbcType=INTEGER} order by start_time  desc limit #{startPage}, #{pageSize}
+	</select>	
+	 <!-- 2.根据项目id获取项目信息-->
+	 
+	<select id="getProjById" resultMap="BaseResultMap" >
+		select
+		<include refid="Base_Column_List" />
+		from t_project
+		where id = #{id,jdbcType=INTEGER}
+	</select> 	
+	 
+	<!-- 3. 根据项目和用户的id查询项目和用户信息的组合-->
+	
+	<select id="getUserProjectByUPId" resultMap="UserProjectMap">
+		select
+		<include refid="UserProject_Column_List" />
+		from t_project 
+		join t_user_proj on t_project.id=t_user_proj.proj_id join
+		t_user on t_user.id=t_user_proj.user_id		
+		where t_project.id = #{projectId,jdbcType=INTEGER} AND
+		t_user.id = #{userId,jdbcType=INTEGER} 
+	</select>	
+	
+	
+	<!-- 4. 保存项目信息 -->
+	
+	<insert id="saveProject" parameterType="com.bcdbook.project.pojo.Project">
+		insert into t_project
+		(tag,state,type,name,proj_describe,des_img,create_time,start_time,cycle,end_time,target_money,finish_money,
+		sell_stock,count_product,unit_price,repay_explain,id_card,wechat_dimen,warning,founder_img,founder_des,recommend)
+		values (#{tag,jdbcType=INTEGER},
+		#{state,jdbcType=INTEGER},
+		#{type,jdbcType=INTEGER},
+		#{name,jdbcType=VARCHAR},
+		#{projDescribe,jdbcType=VARCHAR},
+		#{desImg,jdbcType=VARCHAR},
+		#{createTime,jdbcType=VARCHAR},
+		#{startTime,jdbcType=VARCHAR},
+		#{cycle,jdbcType=INTEGER},
+		#{endTime,jdbcType=VARCHAR},
+		#{targetMoney,jdbcType=INTEGER},
+		#{finishMoney,jdbcType=INTEGER},
+		#{sellStock,jdbcType=INTEGER},
+		#{countProduct,jdbcType=INTEGER},
+		#{unitPrice,jdbcType=DOUBLE},
+		#{repayExplain,jdbcType=VARCHAR},
+		#{idCard,jdbcType=VARCHAR},
+		#{wechatDimen,jdbcType=VARCHAR},
+		#{warning,jdbcType=VARCHAR},
+		#{founderImg,jdbcType=VARCHAR},
+		#{founderDes,jdbcType=VARCHAR},
+		#{recommend,jdbcType=INTEGER})
+	</insert>	
+	
+	<!--5.根据创建时间和项目名称获取项目对象的方法-->
+	<select id="getProj" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_project
+		where create_time = #{createTime,jdbcType=VARCHAR} AND
+		name = #{name,jdbcType=VARCHAR} 	
+	</select> 
+	
+	<!--6.根据项目的id删除一个项目:伪删除:实际上是把标志tag设置为2:删除(1.正常2.删除)-->
+	<update id="deleteProjById" >
+		update t_project
+		set
+		tag =2		
+		where id =
+		#{projId,jdbcType=INTEGER}
+	</update> 
+	
+	<!-- ************************************************************************ -->
+	
+	<!--7.更新一条指定id的项目-->
+	<update id="updatProjectById">
+	update t_project
+
+	<set>
+		<if test="proj.tag != null">
+			tag = #{proj.tag,jdbcType=INTEGER},
+		</if>
+		<if test="proj.state != null">
+			state = #{proj.state,jdbcType=INTEGER},
+		</if>
+
+		<if test="proj.type != null">
+			type = #{proj.type,jdbcType=INTEGER},
+		</if>
+		<if test="proj.name != null">
+			name = #{proj.name,jdbcType=VARCHAR},
+		</if>
+		<if test="proj.projDescribe != null">
+			projDescribe = #{proj.projDescribe,jdbcType=VARCHAR},
+		</if>
+		<if test="proj.desImg != null">
+			desImg = #{proj.desImg,jdbcType=VARCHAR},
+		</if>
+		<if test="proj.createTime != null">
+			createTime = #{proj.createTime,jdbcType=VARCHAR},
+		</if>
+		<if test="proj.startTime != null">
+			startTime = #{proj.startTime,jdbcType=VARCHAR},
+		</if>
+		<if test="proj.cycle != null">
+			cycle = #{proj.cycle,jdbcType=INTEGER},
+		</if>
+		<if test="proj.endTime != null">
+			endTime = #{proj.endTime,jdbcType=VARCHAR},
+		</if>
+		<if test="proj.targetMoney != null">
+			targetMoney = #{proj.targetMoney,jdbcType=INTEGER},
+		</if>
+		<if test="proj.finishMoney != null">
+			finishMoney = #{proj.finishMoney,jdbcType=INTEGER},
+		</if>
+		<if test="proj.sellStock != null">
+			sellStock = #{proj.sellStock,jdbcType=INTEGER},
+		</if>
+		<if test="proj.countProduct != null">
+			countProduct = #{proj.countProduct,jdbcType=INTEGER},
+		</if>
+		<if test="proj.unitPrice != null">
+			unitPrice = #{proj.unitPrice,jdbcType=DOUBLE},
+		</if>
+		<if test="proj.repayExplain!= null">
+			repayExplain = #{proj.repayExplain,jdbcType=VARCHAR},
+		</if>
+		<if test="proj.idCard != null">
+			idCard = #{proj.idCard,jdbcType=VARCHAR},
+		</if>
+		<if test="proj.wechatDimen != null">
+			wechatDimen = #{proj.wechatDimen,jdbcType=VARCHAR},
+		</if>
+		<if test="proj.warning != null">
+			warning = #{proj.warning,jdbcType=VARCHAR},
+		</if>
+		<if test="proj.founderImg != null">
+			founderImg = #{proj.founderImg,jdbcType=VARCHAR},
+		</if>
+		<if test="proj.founderDes != null">
+			founderDes = #{proj.founderDes,jdbcType=VARCHAR},
+		</if> 
+	</set>
+	where id =
+	#{projId,jdbcType=INTEGER}
+</update> 
+
+
+
+<!-- 8.根据项目和用户的关系查询项目和用户组合信息的集合-->
+	
+	<select id="listProject" resultMap="UserProjectMap">
+		select
+		<include refid="UserProject_Column_List" />
+		from t_project 
+		join t_user_proj on t_project.id=t_user_proj.proj_id join
+		t_user on t_user.id=t_user_proj.user_id		
+		where 
+		  t_user.tag=1 AND t_project.tag=1 AND
+		t_user.id=#{userId,jdbcType=INTEGER}
+		<if test="reason != 0">
+			AND	t_user_proj.reason = #{reason,jdbcType=INTEGER}
+		</if>
+		<if test="hasCollect != 0">
+			AND t_user_proj.has_collect = #{hasCollect,jdbcType=INTEGER}
+		</if>
+		<if test="state != 0">
+			AND t_project.state = #{state,jdbcType=INTEGER}
+		</if>
+		<if test="type != 0">
+			AND t_project.type = #{type,jdbcType=INTEGER}
+		</if>		
+	</select>	
+	
+	
+	<!-- 9.根据项目和用户的关系查询项目和用户组合信息的集合-->
+	
+	<select id="listProjectByCondition" resultMap="UserProjectMap">
+		select
+		<include refid="UserProject_Column_List" />
+		from t_project 
+		join t_user_proj on t_project.id=t_user_proj.proj_id join
+		t_user on t_user.id=t_user_proj.user_id		
+		where 
+		  t_user.tag=1 AND t_project.tag=1 AND
+		t_user.id=#{userId,jdbcType=INTEGER}
+		<if test="reason != 0">
+			AND	t_user_proj.reason = #{reason,jdbcType=INTEGER}
+		</if>
+		<if test="hasCollect != 0">
+			AND t_user_proj.has_collect = #{hasCollect,jdbcType=INTEGER}
+		</if>
+		<if test="state != 0 and keepState == 0">
+			AND t_project.state = #{state,jdbcType=INTEGER}
+		</if> 
+		
+		<if test="state == 0 and keepState != 0">
+			AND  t_project.state = #{keepState,jdbcType=INTEGER}
+		</if>
+		<if test="state != 0 and keepState != 0">
+				AND (t_project.state = #{state,jdbcType=INTEGER} OR  t_project.state = #{keepState,jdbcType=INTEGER})			
+		</if>		
+		<if test="type != 0 and keepType == 0">
+			AND t_project.type = #{type,jdbcType=INTEGER}
+		</if> 
+		
+		<if test="type == 0 and keepType != 0">
+			AND  t_project.type = #{keepType,jdbcType=INTEGER}
+		</if>
+		<if test="type != 0 and keepType != 0">
+				AND (t_project.type = #{type,jdbcType=INTEGER} OR  t_project.type = #{keepType,jdbcType=INTEGER})			
+		</if>		
+	</select>		
+	
+	<!-- 10.根据项目的id查找改项目和它的创始人的组合信息	即reason=1发起关系-->
+	<select id="getUserProjectByPId" resultMap="UserProjectMap">
+		select
+		<include refid="UserProject_Column_List" />
+		from t_project 
+		join t_user_proj on t_project.id=t_user_proj.proj_id join
+		t_user on t_user.id=t_user_proj.user_id		
+		where proj_id = #{projId,jdbcType=INTEGER} AND
+		reason =1 AND
+		t_project.tag=1 AND
+		t_user.tag=1
+	</select> 
+	
+	
+	<!-- 11.根据保存的项目重置项目完成金额 -->
+	
+	<update id="resetFinishMoney" parameterType="com.bcdbook.project.pojo.Project">
+	update t_project
+	<set>	    
+	    finish_money=#{finishMoney,jdbcType=VARCHAR}
+	  </set>	    		
+	where id =#{id,jdbcType=INTEGER}
+	
+    </update>
+	
+	
+	<!-- 12.根据项目审核状态查询项目用户组合信息的的集合-->
+	
+	<select id="listUPByState" resultMap="UserProjectMap">
+		select
+		<include refid="UserProject_Column_List" />
+		from t_project 
+		join t_user_proj on t_project.id=t_user_proj.proj_id join
+		t_user on t_user.id=t_user_proj.user_id		
+		where state = #{state,jdbcType=INTEGER} AND
+		reason =1 AND
+		t_project.tag=1 AND
+		t_user.tag=1
+	</select> 
+		
+	<!-- 13.根据项目阶段和项目类型查询项目和用户的信息组合的集合：-->
+	
+	<select id="listUpByStateAndType" resultMap="UserProjectMap">
+		select
+		<include refid="UserProject_Column_List" />
+		from t_project 
+		join t_user_proj on t_project.id=t_user_proj.proj_id join
+		t_user on t_user.id=t_user_proj.user_id		
+		where 
+		
+		<if test="state!=0">
+				state = #{state,jdbcType=INTEGER} AND
+		</if>		
+		<if test="type!=0">
+				type = #{type,jdbcType=INTEGER} AND
+		</if>		
+		reason =1 AND
+		t_project.tag=1 AND
+		t_user.tag=1
+	</select> 
+	
+	<!-- 根据手机号码和验证码(对应password字段)获取用户 -->
+	<!-- <select id="listProj" resultMap="BaseResultMap">
+		select 
+		<include refid="Proj_Column_List" />
+		 from t_project
+	</select> -->
+	
+		<!-- 14.根据项目projId把项目设置为已完成 -->
+	
+	<update id="setProjFinishedByPId">
+	update t_project
+    set	    
+	    pay_type=1
+	    		
+	where id =#{porjId,jdbcType=INTEGER}	
+    </update>
+    
+    <!--15.查出待审核项目的集合-->
+	<select id="getProjtoExamine" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List0" />
+		from t_project
+		where tag=1 AND
+		      state=2 	
+	</select> 
+	
+	<!-- 16.待审核项目分页总数 -->	
+		<select id="countExamineProjPage" resultType="int">
+		select
+			ceil(count(t_project.id)/#{pageSize})
+		 from t_project
+		 where tag=1 AND
+		      state=2 	
+	</select>
+	
+
+	<!--***************************项目管理********************  -->
+	
+	<!--17.获取主推的项目-->
+	<select id="getRecommendProj" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List0" />
+		from t_project
+		where tag=1 AND
+		      recommend=1 limit #{startPage},#{pageSize} 	
+	</select> 
+	
+	<!-- 18.主推项目分页总数.-->	
+		<select id="countRecommendProjPage" resultType="int">
+		select
+			ceil(count(t_project.id)/#{pageSize})
+		 from t_project
+		 where tag=1 AND
+		      recommend=1 
+	</select>
+	<!--19.获取已完成的项目 -->
+	<select id="getFinishedProj" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List0" />
+		from t_project
+		where tag=1 AND
+		      type=2 limit #{startPage},#{pageSize}	
+	</select> 
+	
+	<!-- 20.已完成项目分页总数-->	
+		<select id="countFinishedProjPage" resultType="int">
+		select
+			ceil(count(t_project.id)/#{pageSize})
+		from t_project
+		where tag=1 AND
+		      type=2 
+	</select>
+	<!--21.获取进行中的项目-->
+	<select id="getOngoingProj" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List0" />
+		from t_project
+		where tag=1 AND
+		      state=3 AND
+		      type=1 limit #{startPage},#{pageSize}	
+	</select> 
+	
+	<!-- 22.进行中项目分页总数-->	
+		<select id="countOngoingProjPage" resultType="int">
+		select
+			ceil(count(t_project.id)/#{pageSize})
+		from t_project
+		where tag=1 AND
+		      type=1
+	</select>
+	<!--***********************************************************  -->
+	<!-- 23.已审核项目的集合-->
+	<select id="getNotPassProj" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List0" />
+		from t_project
+		where tag=1 AND
+		      state=4	
+	</select> 
+	
+	<!-- 24.已审核项目分页总数 -->	
+		<select id="countNotPassProjPage" resultType="int">
+		select
+			ceil(count(t_project.id)/#{pageSize})
+		 from t_project
+		 where tag=1 AND
+		      state=4 	
+	</select>	
+	
+	<!--**************************************************************  -->
+		<!--25.把项目设为主推项目 -->
+	
+	<update id="setProjRecommend">
+	update t_project
+    set	    
+	    recommend=#{recommend}		        		
+	where id =#{projId}	
+    </update>
+    
+    	<!--26.根据	项目的id设置项目的审核转台state：3为审核通过，4为审核不通过 -->
+	
+	<update id="resetProjStateAndType">
+	update t_project
+    <set>
+     <trim  suffixOverrides=",">
+		<if test="state != null">
+			  state=#{state,jdbcType=INTEGER},
+		</if>
+		<if test="type != null">
+			type = #{type,jdbcType=INTEGER},
+		</if>
+		</trim>
+	  
+	  </set>  		
+	where id =#{projId}	
+    </update>
+    <!--  众筹失败的项目-->
+    <!-- ********************************************************** -->
+    <!-- 27.众筹失败的项目的集合-->
+	<select id="getFailedProj" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List0" />
+		from t_project
+		where tag=1 AND
+		      type=3	
+	</select> 
+	
+	<!-- 28.众筹失败的项目分页总数 -->	
+		<select id="countFailedProjPage" resultType="int">
+		select
+			ceil(count(t_project.id)/#{pageSize})
+		 from t_project
+		 where tag=1 AND
+		      type=3	
+	</select>	
+    
+	
+</mapper>

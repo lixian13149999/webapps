@@ -1,0 +1,46 @@
+/*
+ * 项目主题样式定义的less文件
+ */
+.icon-primary:hover {
+  color: #179afc;
+}
+.icon-action:hover {
+  color: #b9e563;
+}
+.icon-highlight:hover {
+  color: #fec04e;
+}
+.icon-caution:hover {
+  color: #ff7680;
+}
+.icon-royal:hover {
+  color: #a49ef0;
+}
+.title-search-div {
+  margin-right: 0px;
+  margin-left: 0px;
+}
+.title-search-div .title-search-input {
+  width: 300px;
+  float: right;
+  margin-top: -65px;
+}
+.title-search-div .title-tips-container {
+  float: right;
+  margin-top: -55px;
+}
+.title-search-div .title-tips-container i {
+  font-size: 18px;
+  padding: 0 3px;
+}
+.title-search-div .title-tips-container i:hover {
+  color: #179afc;
+}
+.pages-div {
+  text-align: center;
+}
+.pages-div .page-checked-a {
+  background-color: #eee;
+  color: #23527c;
+  border-color: #ddd;
+}
