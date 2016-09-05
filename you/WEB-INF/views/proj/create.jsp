@@ -42,8 +42,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-	<a id="hide_save_back_a" href="/user/proj?reason=1&hasCollect=0&state=1&type=0"></a>
-	<a id="hide_submit_back_a" href="/user/proj?reason=1&hasCollect=0&state=2&type=0"></a>
+	<a id="hide_save_back_a" href="/user/proj?reason=1&hasCollect=0&state=1&keepState=1&type=0"></a>
+	<a id="hide_submit_back_a" href="/user/proj?reason=1&hasCollect=0&state=2&keepState=2&type=0"></a>
 
     <div class="primary row">
         <div class="create-intr">

@@ -62,8 +62,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<!-- <a id="provision_checkbox" class="agreement-checkbox" data-checkbox-ibox="checkbox" data-checkbox-ibox-type="uncheck">
 			    什么情况
 			</a> -->
-			<a id="provision_checkbox" class="hover-primary" href="javascript:void(0)" data-checkbox-ibox="checkbox" data-checkbox-ibox-type="uncheck">
-				<i class="icon icon-checkbox"></i>
+			<a id="provision_checkbox" class="hover-primary" href="javascript:void(0)" data-checkbox-ibox="checkbox" data-checkbox-ibox-type="checked">
+				<i class="icon icon-checkbox-checked"></i>
 			</a>
             <!-- <input type="checkbox" /> -->
             <span class="agreement-span">我已阅读并同意

@@ -153,7 +153,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                           <!--  判断是否是审核不过的项目-->
                           
                           
-                          <c:if test="${up.state==2 }">    
+                          <c:if test="${up.state!=4 }">    
                           
                                 剩余
                         <a href="${ctx }/proj/info?projId=${up.projectId}&userId=${up.userId}">${30-up.day }</a>

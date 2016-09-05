@@ -83,6 +83,14 @@
 		id_card,wechat_dimen,warning,reason,has_collect,founder_des,recommend	  
 	</sql>
 	
+	
+	<sql id="UserProject_Column_List2">
+		t_user2.username As username,t_user2.nickname AS nickname,t_user2.last_login_time AS last_login_time,
+		t_user2.create_code_time AS create_code_time,t_user2.photo AS photo,t_project.id as project_id,t_user2.id as user_id,
+		state,type,name,proj_describe,des_img,founder_img,start_time,target_money,finish_money,count_product,unit_price,repay_explain,
+		id_card,wechat_dimen,warning,t_user_proj.reason AS reason ,t_user_proj2.has_collect As has_collect,founder_des,recommend	  
+	</sql>
+	
 	<!-- 1.根据条件分页查询需要的项目和对应的用户信息:tag=1.正常,type=1.众筹进行中,state=3.审核通过    排序:添加时间-->
 	
 	<select id="listProj" resultMap="UserProjectMap">
@@ -274,13 +282,15 @@
 	
 	<select id="listProjectByCondition" resultMap="UserProjectMap">
 		select
-		<include refid="UserProject_Column_List" />
+		<include refid="UserProject_Column_List2" />
 		from t_project 
 		join t_user_proj on t_project.id=t_user_proj.proj_id join
-		t_user on t_user.id=t_user_proj.user_id		
+		t_user on t_user.id=t_user_proj.user_id	JOIN t_user_proj t_user_proj2 ON t_user_proj2.proj_id=t_project.id join t_user t_user2 on 
+   t_user_proj2.user_id=t_user2.id
 		where 
+		  t_user_proj2.reason=1 AND
 		  t_user.tag=1 AND t_project.tag=1 AND
-		t_user.id=#{userId,jdbcType=INTEGER}
+		  t_user.id=#{userId,jdbcType=INTEGER}
 		<if test="reason != 0">
 			AND	t_user_proj.reason = #{reason,jdbcType=INTEGER}
 		</if>
