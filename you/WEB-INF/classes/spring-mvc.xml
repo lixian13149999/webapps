@@ -89,6 +89,8 @@
             <mvc:exclude-mapping path="/wechat/login" />
             <mvc:exclude-mapping path="/wechat/getCode" />
             <mvc:exclude-mapping path="/wechat/getUserInfo" />
+            <mvc:exclude-mapping path="/wechat/getJSSignature" />
+            
             <mvc:exclude-mapping path="/login" />
             <mvc:exclude-mapping path="/login/getCode" />
             <mvc:exclude-mapping path="/proj" />
