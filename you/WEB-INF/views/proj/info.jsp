@@ -67,9 +67,7 @@
                 </div>
             </div>
             <div class="proj-title">
-               <a>
-                ${userProject.name }
-               </a>
+               <a id="proj_title_id">${userProject.name }</a>
             </div>
             
             <div class="proj-bottom-box">
@@ -102,18 +100,14 @@
                 
            	<!-- 项目大图 -->
             <div class="proj-img">
-            	<a data-back-img="open" data-back-img-mapping="back_img_box" href="javascript:void(0)">
+            	<a id="proj_imgs_id" data-back-img="open" data-back-img-mapping="back_img_box" href="javascript:void(0)">
 					<c:forEach begin="0" end="3" var="url" items="${userProject.a_desImg}">
 						<img class="proj-img-item" src="${url}" alt="">
 					</c:forEach>
 				</a>
 			</div>
             <div class="proj-info">
-                <a href="javascript:void(0)">
-                ${userProject.projDescribe }
-
-          
-                </a>
+                <a id="proj_desc_id" href="javascript:void(0)">${userProject.projDescribe }</a>
             </div>
         </div>
         
@@ -172,14 +166,15 @@
     <c:if test="${userProject.reason==1}">
 	    <div class="bottom-info-self bottom-box container-fluid">
 	       <div class="row bottom-button-box">
-	            <a data-page-button="bottom" data-page-button-todo="supporter" href="/proj/supporter?projId=${userProject.projectId }" class="bottom-icon-box col-xs-6">
+	            <a data-page-button="bottom" data-page-button-todo="supporter" href="/proj/supporter?projId=${userProject.projectId }" class="bottom-icon-box col-xs-12">
 	                <i class="icon icon-supporter bottom-icon-i"></i>
 	                <label for="" class="bottom-icon-label">支持者</label>
 	            </a>
+	            <!-- 
 	            <a data-page-button="bottom" data-page-button-todo="share" href="javascript:void(0)" class="bottom-icon-box col-xs-6">
 	                <i class="icon icon-share bottom-icon-i"></i>
 	                <label for="" class="bottom-icon-label">分享</label>
-	            </a>
+	            </a> -->
 	       </div>
 	    </div>
     </c:if>
@@ -187,22 +182,22 @@
 	    <div class="bottom-info bottom-box container-fluid">
 	       <div class="row bottom-button-box">
 	
-	            <a data-page-button="bottom" data-page-button-todo="complain" href="javascript:void(0)" class="bottom-icon-box icol-xs-2">
+	            <a data-page-button="bottom" data-page-button-todo="complain" href="javascript:void(0)" class="bottom-icon-box icol-xs-3">
 	                <i class="icon icon-warning bottom-icon-i"></i>
 	                <label for="" class="bottom-icon-label">投诉</label>
 	            </a>
-	            <a data-page-button="bottom" data-page-button-todo="share" href="javascript:void(0)" class="bottom-icon-box icol-xs-2 checked">
+	            <!-- <a data-page-button="bottom" data-page-button-todo="share" href="javascript:void(0)" class="bottom-icon-box icol-xs-2 checked">
 	                <i class="icon icon-share bottom-icon-i"></i>
 	                <label for="" class="bottom-icon-label">分享</label>
-	            </a>
+	            </a> -->
 		        <c:if test="${userProject.hasCollect==1 }">
-		            <a data-page-button="bottom" data-page-button-todo="unCollect" href="javascript:void(0)" class="bottom-icon-box icol-xs-2 checked">
+		            <a data-page-button="bottom" data-page-button-todo="unCollect" href="javascript:void(0)" class="bottom-icon-box icol-xs-3 checked">
 			                <i class="icon icon-collected bottom-icon-i"></i>
 			                <label for="" class="bottom-icon-label">已收藏</label>
 		            </a>
 		        </c:if>
 		        <c:if test="${userProject.hasCollect!=1 }">
-		        	<a data-page-button="bottom" data-page-button-todo="collect" href="javascript:void(0)" class="bottom-icon-box icol-xs-2 checked">
+		        	<a data-page-button="bottom" data-page-button-todo="collect" href="javascript:void(0)" class="bottom-icon-box icol-xs-3 checked">
 		                <i class="icon icon-collect bottom-icon-i"></i>
 		                <label for="" class="bottom-icon-label">收藏</label>
 		            </a>

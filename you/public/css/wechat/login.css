@@ -126,6 +126,10 @@
   width: 20%;
   float: left;
 }
+.icol-xs-3 {
+  width: 30%;
+  float: left;
+}
 .icol-xs-4 {
   width: 40%;
   float: left;

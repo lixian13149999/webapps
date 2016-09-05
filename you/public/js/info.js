@@ -20,6 +20,15 @@ var info = new Object();
 
 $(function(){
 	info.setWechatJSAPI();
+	info.projLink = window.location.href;
+	info.projTitle = $("#proj_title_id").text();
+	info.projImgUrl = $("#proj_imgs_id").children("img").first().attr("src");
+	info.projDesc = $("#proj_desc_id").text();
+	
+	console.log(info.projLink);
+	console.log(info.projTitle);
+	console.log(info.projImgUrl);
+	console.log(info.projDesc);
 	
     //底部按钮点击事件的监听
 	$('[data-page-button="bottom"]').on('click',function(){
@@ -97,7 +106,7 @@ info.setWechatJSAPI = function(){
 	           cb(data);
 	      },
 	      error : function() {
-	          imessenger.error("系统出错");
+	          imessenger.error("生成分享时系统出错");
 	      }
 	  });
 	
@@ -120,9 +129,9 @@ info.setWechatJSAPI = function(){
 			// config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
 			console.log("ready");
 			wx.onMenuShareTimeline({
-			    title: '', // 分享标题
-			    link: '', // 分享链接
-			    imgUrl: '', // 分享图标
+			    title: info.projTitle, // 分享标题
+			    link: info.projLink, // 分享链接
+			    imgUrl: info.projImgUrl, // 分享图标
 			    success: function () { 
 			        // 用户确认分享后执行的回调函数
 			    },
@@ -131,9 +140,12 @@ info.setWechatJSAPI = function(){
 			    }
 			});
 			wx.onMenuShareAppMessage({
-			    title: '', // 分享标题
-			    link: '', // 分享链接
-			    imgUrl: '', // 分享图标
+			    title: info.projTitle, // 分享标题
+			    desc: '', // 分享描述
+			    link: info.projLink, // 分享链接
+			    imgUrl: info.projImgUrl, // 分享图标
+			    type: 'link', // 分享类型,music、video或link，不填默认为link
+			    dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
 			    success: function () { 
 			        // 用户确认分享后执行的回调函数
 			    },
@@ -190,7 +202,7 @@ info.submitComplain = function(){
 	           cb(data);
 	      },
 	      error : function() {
-	          imessenger.error("系统出错");
+	          imessenger.error("投诉前请先登录");
 	      }
 	  });
 		
@@ -238,7 +250,8 @@ info.collect = function(ele){
              cb(data);
         },
         error : function() {
-            console.log('用户删除角色出错');
+        	imessenger.error("请先登录再收藏");
+            //console.log('用户删除角色出错');
         }
     });
     

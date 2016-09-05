@@ -94,6 +94,7 @@
             <mvc:exclude-mapping path="/proj" />
             <mvc:exclude-mapping path="/proj/listJson" />
             <mvc:exclude-mapping path="/proj/payBack" />    
+            <mvc:exclude-mapping path="/proj/info" />    
             
             <!-- weiyuan添加防止拦截后天admin操作 --> 
             <mvc:exclude-mapping path="/admin/login" />

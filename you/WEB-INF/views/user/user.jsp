@@ -102,17 +102,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </span>
                     </a>
                 </div>
-                <!-- <div class="intr-line-box">
+                <div class="intr-line-box">
                     <a data-open-input="open" data-mapping-id="hide_proj_repay_explain" class="link-box" href="javascript:void(0)">
                         <span class="line-intr-label" for="">
                             <i class="icon icon-customer-service line-intr-emp"></i>
                             客服
                         </span>
                         <span class="line-tip">
-                            <i class="icon icon-goto"></i>
+                        	029—82286892
+                            <!-- <i class="icon icon-goto"></i> -->
                         </span>
                     </a>
-                </div> -->
+                </div>
             </div>
             <div class="intr-cont">
 
