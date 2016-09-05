@@ -44,7 +44,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	<div class="primary row buy-cont">
         <div class="project-box">
             <div class="proj-top">
-                <div style="background-image: url('/public/imgs/user.png');" class="proj-user-photo">
+                <div style="background-image: url('${userProject.photo}');" class="proj-user-photo">
 
                 </div>
                 <div class="proj-user-name">
