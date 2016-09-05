@@ -37,9 +37,9 @@
 
 <body>
 	<div id="wechat_login_msg">
-		验证通过,正在自动转发
+		验证通过,正在自动转发,将要自动转发,如果不能自动转发
 	</div>
-	<a id="wechat_certify_success_href" href="javascript:void(0)">将要自动转发,如果不能自动转发请点击</a>
+	<a id="wechat_certify_success_href" href="/proj">返回列表</a>
 	
 		<input class="hide" type="hidden" id="openid" value="${openid}" />
 		<input class="hide" type="hidden" id="code" value="${code}" />

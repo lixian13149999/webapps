@@ -201,7 +201,7 @@
 		<include refid="Base_Column_List0" />
 		from t_user join t_user_proj ON t_user.id=t_user_proj.user_id
 		where t_user.tag=1 AND
-		 t_user_proj.reason=1 limit #{startPage},#{pageSize}
+		 t_user_proj.reason=1  group by t_user.id limit #{startPage},#{pageSize}
 	</select>
 	
 	
@@ -211,7 +211,7 @@
 			ceil(count(t_user.id)/#{pageSize})
 		from t_user join t_user_proj ON t_user.id=t_user_proj.user_id
 		where t_user.tag=1 AND
-		 t_user_proj.reason=1 
+		 t_user_proj.reason=1 group by t_user.id limit
 	</select>
 	
 	
@@ -222,7 +222,7 @@
 		<include refid="Base_Column_List0" />
 		from t_user join t_user_proj ON t_user.id=t_user_proj.user_id
 		where t_user.tag=1 AND
-		 t_user_proj.reason=2 limit #{startPage},#{pageSize}
+		 t_user_proj.reason=2 group by t_user.id limit #{startPage},#{pageSize}
 	</select>
 	
 	 <!-- 14.统计按照当分页大小查询支持项目者的总页数-->	
@@ -231,7 +231,7 @@
 			ceil(count(t_user.id)/#{pageSize})
 		from t_user join t_user_proj ON t_user.id=t_user_proj.user_id
 		where t_user.tag=1 AND
-		 t_user_proj.reason=2 
+		 t_user_proj.reason=2 group by t_user.id 
 	</select>
 	
    

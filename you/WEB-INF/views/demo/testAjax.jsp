@@ -25,8 +25,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
     test/testAjax.jsp
     <input type="button" value="Ajax请求" onclick="ajaxData()" />
+    <!-- <input type="button" value=> -->
   </body>
 <script type="text/javascript">var ctx = "${ctx}";</script>
 <script type="text/javascript" src="${ctx}/public/lib/js/jquery.min.js"></script>
-<script type="text/javascript" src="${ctx}/public/js/test.js"></script>
+<%-- <script type="text/javascript" src="${ctx}/public/js/test.js"></script> --%>
 </html>

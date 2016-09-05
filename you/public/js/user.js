@@ -311,7 +311,7 @@ user.refreshUserProj = function(){
                 var proj = projList[i];
                 
                 var flag='审核不过';
-                if(proj.state==2){
+                if(proj.state!=4){
                 	flag='剩余'+
                     '<a href="/proj/info?projId='+proj.projectId+'&userId='+proj.userId+'">'+//剩余天数		                       
                     	(30 -proj.day)+		                    	

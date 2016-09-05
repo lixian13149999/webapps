@@ -65,13 +65,13 @@
                     </a>
                 </dd>
                 <dd class="item">
-                    <a href="javascript:void(0)" onclick="fUserList(1,2)" class="item-a item-second" data-refresh-page="user_created">
+                    <a href="javascript:void(0)" onclick="fUserList(1,10)" class="item-a item-second" data-refresh-page="user_created">
 <!--                        <i class="icon icon-xiaoshou item-icon"></i>-->
                         发起过众筹
                     </a>
                 </dd>
                 <dd class="item">
-                    <a href="javascript:void(0)" onclick="zUserList(1,2)" class="item-a item-second" data-refresh-page="user_buyed">
+                    <a href="javascript:void(0)" onclick="zUserList(1,10)" class="item-a item-second" data-refresh-page="user_buyed">
                         支持过众筹
                     </a>
                 </dd>
@@ -83,7 +83,7 @@
                     </a>
                 </dd>
                 <dd class="item">
-                    <a id="base_jubaoshenhe_a" href="javascript:void(0)" onclick="reportMsgList(1,2)" class="item-a item-second" data-refresh-page="report">
+                    <a id="base_jubaoshenhe_a" href="javascript:void(0)" onclick="reportMsgList(1,10)" class="item-a item-second" data-refresh-page="report">
 <!--                        <i class="icon icon-juese item-icon"></i>-->
                         举报审核
                     </a>
@@ -96,19 +96,19 @@
                     </a>
                 </dd>
                 <dd class="item">
-                    <a href="javascript:void(0)" onclick="cashApplyToApprove(1,2)" class="item-a item-second" data-refresh-page="lizhi">
+                    <a href="javascript:void(0)" onclick="cashApplyToApprove(1,10)" class="item-a item-second" data-refresh-page="lizhi">
 <!--                        <i class="icon icon-xiugai item-icon"></i>-->
                         待审核申请
                     </a>
                 </dd>
                 <dd class="item">
-                    <a href="javascript:void(0)" onclick="cashApplyToConfirm(1,2)" class="item-a item-second" data-refresh-page="lizhi">
+                    <a href="javascript:void(0)" onclick="cashApplyToConfirm(1,10)" class="item-a item-second" data-refresh-page="lizhi">
 <!--                        <i class="icon icon-xiugai item-icon"></i>-->
                         待确认申请
                     </a>
                 </dd>
                 <dd class="item">
-                    <a href="javascript:void(0)" onclick="finishedCashApply(1,2)" class="item-a item-second" data-refresh-page="lizhi">
+                    <a href="javascript:void(0)" onclick="finishedCashApply(1,10)" class="item-a item-second" data-refresh-page="lizhi">
 <!--                        <i class="icon icon-xiugai item-icon"></i>-->
                         已完成提现
                     </a>
@@ -121,13 +121,13 @@
                     </a>
                 </dd>
                 <dd class="item">
-                    <a href="javascript:void(0)" onclick="examineProjList(1,2)" class="item-a item-second" data-refresh-page="lizhi">
+                    <a href="javascript:void(0)" onclick="examineProjList(1,10)" class="item-a item-second" data-refresh-page="lizhi">
 <!--                        <i class="icon icon-xiugai item-icon"></i>-->
                         待审核项目
                     </a>
                 </dd>
                   <dd class="item">
-                    <a href="javascript:void(0)" onclick="notPassProjList(1,2)" class="item-a item-second" data-refresh-page="lizhi">
+                    <a href="javascript:void(0)" onclick="notPassProjList(1,10)" class="item-a item-second" data-refresh-page="lizhi">
 <!--                        <i class="icon icon-xiugai item-icon"></i>-->
                        审核不通过
                     </a>
@@ -146,26 +146,26 @@
                     </a>
                 </dd> -->
                 <dd class="item">
-                    <a href="javascript:void(0)" onclick="recommendProjList(1,2)" class="item-a item-second" data-refresh-page="lizhi">
+                    <a href="javascript:void(0)" onclick="recommendProjList(1,10)" class="item-a item-second" data-refresh-page="lizhi">
 <!--                        <i class="icon icon-xiugai item-icon"></i>-->
                         主推项目
                     </a>
                 </dd>
                 <dd class="item">
-                    <a href="javascript:void(0)" onclick="finishedProjList(1,2)" class="item-a item-second" data-refresh-page="lizhi">
+                    <a href="javascript:void(0)" onclick="finishedProjList(1,10)" class="item-a item-second" data-refresh-page="lizhi">
 <!--                        <i class="icon icon-xiugai item-icon"></i>-->
                         已完成项目
                     </a>
                 </dd>
                 
                       <dd class="item">
-                    <a href="javascript:void(0)" onclick="failedProjList(1,2)" class="item-a item-second" data-refresh-page="lizhi">
+                    <a href="javascript:void(0)" onclick="failedProjList(1,10)" class="item-a item-second" data-refresh-page="lizhi">
 <!--                        <i class="icon icon-xiugai item-icon"></i>-->
                         众筹失败项目
                     </a>
                 </dd>
                 <dd class="item">
-                    <a href="javascript:void(0)" onclick="ongoingProjList(1,2)" class="item-a item-second" data-refresh-page="lizhi">
+                    <a href="javascript:void(0)" onclick="ongoingProjList(1,10)" class="item-a item-second" data-refresh-page="lizhi">
 <!--                        <i class="icon icon-xiugai item-icon"></i>-->
                         进行中项目
                     </a> 
