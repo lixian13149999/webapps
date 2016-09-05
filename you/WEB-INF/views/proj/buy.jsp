@@ -91,7 +91,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div>
 
         <!--        产品的剩余量-->
-        <input id="hide_count_stock_prod" type="text" class="hide" value="10" />
+        <input id="hide_count_stock_prod" type="text" class="hide" value="${(userProject.targetMoney-userProject.finishMoney)/userProject.unitPrice }" />
         <!--        购买的产品数量,用于向后台传值的字段-->
         <input id="hide_count_buy_prod" type="text" class="hide" value="${wantBuy==0?1:wantBuy}" />
         <!--        隐藏的,用于存储订单总价的字段-->
