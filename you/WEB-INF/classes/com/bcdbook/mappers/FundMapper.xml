@@ -39,7 +39,7 @@
 		<select id="listFundByUserId" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
-		from t_fund JOIN t_project ON t_fund.proj_id=t_project.id
+		from t_fund LEFT JOIN t_project ON t_fund.proj_id=t_project.id
 		where user_id = #{userId,jdbcType=INTEGER}
 		order by create_time desc
 	</select> 

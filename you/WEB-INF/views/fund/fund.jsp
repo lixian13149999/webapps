@@ -42,7 +42,13 @@
         	
         				<div class="fund-box">
                 <div class="fund-top">
-                    <span class="fund-proj-name">${fund.projName}</span>
+                     <c:if test="${fund.projName!=null}">
+                          <span class="fund-proj-name">${fund.projName}</span>                     
+                     </c:if>
+                     
+                     <c:if test="${fund.projName==null}">
+                          <span class="fund-proj-name">钱包提现</span>                     
+                     </c:if>                    
                     <span class="fund-fund-time">${fund.time}</span>
                 </div>
                 <div class="fund-bottom">
