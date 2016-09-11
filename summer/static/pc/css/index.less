@@ -1,0 +1,215 @@
+/**
+ * 主页面的less文件
+ *
+ */
+
+//引入主题定义文件
+@import "./include/theme.less";
+//引入重写标签/样式的文件
+@import "./include/reset.less";
+//引入定义全局公用样式的文件
+@import "./include/main.less";
+
+div{
+//    border: solid red 1px;
+}
+
+.viewFramework-topbar,.viewFramework-body,.viewFramework-footer{
+    min-width: @base-width;
+}
+//头部样式开始
+//头部最外层框样式
+.viewFramework-topbar{
+    background-color: @top-bg-color;
+    a{
+        color: @font-color-default-reversal;
+    }
+    .view-top-cont{
+        width: @base-width;
+        height: @top-height;
+        margin: 0 auto;
+        //头部样式排版
+        .top-logo-box,.top-menu-box,.top-user-box{
+            display: inline-block;
+        }
+        //logo部分样式
+        .top-logo-box{
+            .logo-icon,.logo-title{
+                display: inline-block;
+                vertical-align: bottom;
+            }
+            .logo-icon{
+                .opacity(80,0.8);
+                font-size: 42px;
+                padding-right: 10px;
+            }
+            .logo-title{
+                -webkit-font-smoothing: auto;
+                font-size: 23px;
+                line-height: 58px;
+            }
+        }
+        //预留的栏目部分的div
+        .top-menu-box{
+            min-width: 90px;
+            min-height: 60px;
+        }
+        //user部分样式
+        .top-user-box{
+            float: right;
+            padding-top: 15px;
+            .tools-icon,.user-photo-cont{
+                display: inline-block;
+                vertical-align: middle;
+            }
+            //头部图标样式
+            .tools-icon{
+                padding: 0px 10px;
+                i{
+                    font-size: 22px;
+                }
+            }
+            //头部照片样式
+            .user-photo{
+                display: inline-block;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                margin-left: 20px;
+                background-size: contain;
+            }
+            //头部微信二维码弹出框样式
+            .wechat-2d-barcode{
+                margin: 2px 5px;
+                width: 90px;
+                height: 90px;
+                background-size: contain;
+            }
+            
+            .user-photo-cont{
+                //头部用户详细信息弹出框样式
+                .popover.bottom>.arrow:after{
+                    border-bottom-color:@top-bg-color;
+                }
+                .user-intd-box{
+                    //基础样式控制
+                    width:325px;
+                    display:block;
+                    .intd-top,.intd-body,.intd-foot{
+                        padding:8px 16px;
+                    }
+                    // 弹出框头部样式
+                    .intd-top{
+                        // 基础样式控制
+                        .intd-photo,.intd-info,.intd-top-icon{
+                            display:inline-block;
+                            vertical-align:top;
+                        }
+                        background-color: @top-bg-color;
+                        color:@font-color-default-reversal;
+                        // 放大的照片的样式
+                        .intd-photo{
+                            width: 72px;
+                            height: 72px;
+                            border-radius: 36px;
+                            background-size: contain;
+                        }
+                        //中间用户的简要信息的样式
+                        .intd-info{
+                            .opacity(80,0.8);
+                            padding-top: 6px;
+                            .intd-info-msg{
+                                margin-bottom: 3px;
+                                padding-left: 15px;
+                                &:last-child{
+                                    margin-bottom: 0px;
+                                }
+                            }
+                        }
+                        //用户编辑按钮(小齿轮)的样式
+                        .intd-top-icon{
+                            margin-left: 10px;
+                            float:right;
+                            i{
+                                color:@font-color-default-reversal;
+                                font-size: 18px;
+                            }
+                            .inner-icon-tiny{
+                                display:inline-block;
+                                vertical-align:top;
+                                padding:0px 0px 0px 0px;
+                            }
+                        }
+                    }
+                    // 用户弹出框中间部分样式
+                    .intd-body{
+
+                    }
+                    //用户弹出框底部样式
+                    .intd-foot{
+                        .intd-foot-msg{
+                            color: @font-color-deep;
+                        }
+                        .intd-foot-icon{
+                            float:right;
+                            color: @font-color-deep;
+                            i{
+                                font-size: 18px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+//<div class="viewFramework-body">
+//    <div class="view-body-cont">
+//        <div class="view-sidebar-cont"></div>
+//        <div class="view-product-body"></div>
+//    </div>
+//</div>
+
+//body部分样式开始
+//body框部分样式
+.viewFramework-body{
+//    margin-top: 60px;
+    .view-body-cont{
+        width: @base-width;
+        min-height: 600px;
+        margin:45px auto 70px auto;
+        background-color: @body-bg-color;
+        border: solid @line-color-deep 1px;
+        .view-sidebar-cont,.view-product-body{
+            display: table-cell;
+            vertical-align: top;
+            min-height: 600px;
+            height: 600px;
+        }
+        .view-sidebar-cont{
+            width: 208px;
+            border-right: solid @line-color-light 1px;
+            .sidebar-cont{
+                .imenu();
+            }
+        }
+        .view-product-body{
+            width: 990px;
+        }
+    }
+}
+
+
+//fooler部分样式开始
+//footer框样式
+.viewFramework-footer{
+    background-color: @footer-bg-color;
+    position: relative;
+    .view-footer-cont{
+        width: @base-width;
+        height: @footer-height;
+        margin: 0 auto;
+    }
+}
+
