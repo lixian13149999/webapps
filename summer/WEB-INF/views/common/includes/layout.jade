@@ -11,6 +11,10 @@ html
 		link(rel='stylesheet',type='text/css',href='#{staticCtx}/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css')
 		//- bootstrap的按钮样式
 		link(rel='stylesheet',type='text/css',href='#{staticCtx}/libs/bootstrap-buttons/buttons.css')
+		//- bootstrap弹出框的主样式
+		link(rel='stylesheet',type='text/css',href='#{staticCtx}/libs/messenger/css/messenger.css')
+		//- bootstrap弹出框的主题样式
+		link(rel='stylesheet',type='text/css',href='#{staticCtx}/libs/messenger/css/messenger-theme-air.css')
 		//- 引入阿里的图标
 		link(rel='stylesheet',type='text/css',href='#{staticCtx}/libs/iconfont/iconfont.css')
 		
@@ -20,6 +24,7 @@ html
 		//- 自设定样式的引入
 		link(rel='stylesheet/less',type='text/css',href='#{staticCtx}/pc/css/index.less')
 		//- link(rel='stylesheet/less',type='text/css',href='#{staticCtx}/backup/css/base/width.less')
+		link(rel='stylesheet/less',type='text/css',href='#{staticCtx}/pc/css/include/sign.less')
 
 
 		//- 框架js文件的引入
@@ -27,10 +32,14 @@ html
 		script(type='text/javascript',src='#{staticCtx}/libs/jquery/dist/jquery.min.js')
 		//- jquery验证文件
 		script(type='text/javascript',src='#{staticCtx}/libs/jquery-validation/jquery.validate.min.js')
+		//- 进入jQuery校验的中文提示
+		script(type='text/javascript',src='#{staticCtx}/libs/jquery-validation/localization/messages_zh.min.js')
 		//- jquery-ui文件
 		script(type='text/javascript',src='#{staticCtx}/libs/jquery-ui/jquery-ui.min.js')
 		//- bootstrap主js文件
 		script(type='text/javascript',src='#{staticCtx}/libs/bootstrap/dist/js/bootstrap.min.js')
+		script(type='text/javascript',src='#{staticCtx}/libs/messenger/js/messenger.min.js')
+			
 		//- less编译的js文件
 		script(type='text/javascript',src='#{staticCtx}/libs/less/dist/less.min.js')
 
@@ -39,11 +48,19 @@ html
 		script.
 			var ctx = '#{ctx}';
 			var staticCtx = '#{staticCtx}';
-			console.log(ctx);
-		script(type='text/javascript',src='#{staticCtx}/pc/js/common/itools.js')
+			//- console.log(ctx);
+		script(type='text/javascript',src='#{staticCtx}/pc/js/common/ibootbox.js')
+		script(type='text/javascript',src='#{staticCtx}/pc/js/common/iform.js')
+		script(type='text/javascript',src='#{staticCtx}/pc/js/common/imessenger.js')
 		script(type='text/javascript',src='#{staticCtx}/pc/js/common/ipopover.js')
-		script(type='text/javascript',src='#{staticCtx}/pc/js/common/itop.js')
-		script(type='text/javascript',src='#{staticCtx}/pc/js/common/imenu.js')
+		script(type='text/javascript',src='#{staticCtx}/pc/js/common/itools.js')
+		script(type='text/javascript',src='#{staticCtx}/pc/js/common/iutil.js')
+		script(type='text/javascript',src='#{staticCtx}/pc/js/common/ivalidate.js')
+		script(type='text/javascript',src='#{staticCtx}/pc/js/common/iverify.js')
+		
+		script(type='text/javascript',src='#{staticCtx}/pc/js/system/imain.js')
+		script(type='text/javascript',src='#{staticCtx}/pc/js/system/imenu.js')
+		script(type='text/javascript',src='#{staticCtx}/pc/js/system/itop.js')
 		
 	body
 		block content	

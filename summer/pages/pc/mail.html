@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>用户登录</title>
+    <title>用户注册</title>
 
     <!-- 框架样式引入 -->
     <!-- bootstrap基础样式 -->
@@ -25,7 +25,7 @@
 
 <body>
     <!--头部开始-->
-    <div class="viewFramework-topbar">
+    <div class="viewFramework-topbar-sign">
         <div class="view-top-cont">
             <div class="top-logo-box">
                 <a href="#" class="logo-href">
@@ -35,37 +35,34 @@
             </div>
             <div class="top-menu-box"></div>
             <div class="top-user-box" style="padding-top:25px">
-                没有账号？<a href="signin.html" class="to-signin">请注册</a>
+                已有账号？<a href="signup.html" class="to-signin">请登录</a>
             </div>
         </div>
     </div>
 
     <!--body部分开始-->
-    <div class="viewFramework-body-sign">
+    <div class="viewFramework-body">
         <div class="sign-body-cont">
            <div class="sign-content-box">
-                <div class="left-pic">
-                    <img src="../../static/pc/imgs/left_pic.png" alt="left_pic">
-                </div>
-                <div class="sign-form right-form">
-                   <div class="form-title">
-                       用户登录
-                   </div>
-                   
-                    <form id="signup-form" method="get" action="javascript:void(0)" class="form-horizontal">
-                        <div class="page-form beaut-form-box">
-                            <label for="username" class="control-label">用户名</label>
-                            <input id="username" data-form-control="beaut-control" type="text" name="username" class="form-control" id="" placeholder="">
-                            <label for="username" class="error-msg-label"></label>
-                        </div>
+                <div class="sign-container mail-check-container">
+                    <div class="sign-form mail-form">
+                       <div class="form-title">
+                           邮箱验证
+                       </div>
                         
-                        <div class="page-form beaut-form-box">
-                            <label for="password" class="control-label">密码</label>
-                            <input id="password" data-form-control="beaut-control" type="password" name="password" class="form-control" id="" placeholder="">
-                            <label for="password" class="error-msg-label"></label>
-                        </div><br>
-                        <input type="submit" value="提交" class="button button-primary button-rounded pre-button sure-button" />
-                    </form>
+                        <div class="mail-pic">
+                            <img src="../../static/pc/imgs/mail_icon.png" alt="mail-pic">
+                        </div>
+
+                        <form id="signup-form" method="get" action="javascript:formAction()" class="form-horizontal">
+                            <div class="page-form beaut-form-box">
+                                <label for="email" class="control-label">请输入邮箱地址</label>
+                                <input id="email" data-form-control="beaut-control" type="text" name="email" class="form-control" id="" placeholder="">
+                                <label for="email" class="error-msg-label"></label>
+                            </div>
+                            <input type="submit" value="发送" class="button button-primary button-rounded pre-button mail-button" />
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
