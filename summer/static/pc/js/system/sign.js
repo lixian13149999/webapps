@@ -71,6 +71,7 @@ sign.signinSuccessBack = function(data) {
 	if (iutil.isSuccess(data)) {
 		//跳转到首页
 		window.location.href = ctx;
+//		window.location.href = "";
 	} else {
 		imessenger.error("登录失败");
 	}
