@@ -3,62 +3,6 @@
  * 用于定义页面主题的文件
  *
  */
-body {
-  background-color: #ffffff;
-}
-.viewFramework-topbar {
-  color: #fff;
-}
-.viewFramework-topbar .to-signin {
-  color: #31a9e8;
-}
-.viewFramework-body-sign {
-  position: absolute;
-  top: 66px;
-  bottom: 100px;
-  width: 100%;
-  min-width: 1200px;
-}
-.viewFramework-body-sign .sign-content-box {
-  width: 1200px;
-  height: 100%;
-  margin: 0 auto;
-  position: relative;
-}
-.viewFramework-body-sign .sign-content-box .left-pic {
-  position: absolute;
-  top: 15%;
-  left: 150px;
-  z-index: 10;
-}
-.viewFramework-body-sign .sign-content-box .right-form {
-  width: 314px;
-  height: 294px;
-  top: 22%;
-  right: 200px;
-}
-.viewFramework-body-sign .sign-content-box .sure-button {
-  width: 284px;
-}
-.viewFramework-body-sign .sign-content-box .signin-form-container {
-  width: 636px;
-  height: 358px;
-}
-.viewFramework-body-sign .sign-content-box .signin-form-container img {
-  height: 100%;
-  float: left;
-  border-radius: 5px 0 0 5px;
-}
-.viewFramework-body-sign .sign-content-box .mail-check-container {
-  width: 586px;
-  height: 260px;
-}
-.viewFramework-body-sign .sign-content-box .mail-check-container .mail-pic {
-  margin: 0 0 20px;
-}
-.viewFramework-body-sign .sign-content-box .mail-check-container .mail-button {
-  margin: 0 auto;
-}
 /**
  * 用于抽取,全局中公用样式的文件
  *
@@ -159,6 +103,78 @@ body {
 .has-error .error-msg-label {
   color: #e53a40;
 }
+body {
+  background-color: #ffffff;
+}
+.viewFramework-topbar {
+  color: #fff;
+}
+.viewFramework-topbar .signin-up-msg {
+  display: inline-block;
+  padding: 25px 0;
+  float: right;
+}
+.viewFramework-topbar .signin-up-msg .to-signin {
+  color: #31a9e8;
+}
+.viewFramework-body-sign {
+  position: absolute;
+  top: 66px;
+  bottom: 100px;
+  width: 100%;
+  min-width: 1200px;
+}
+.viewFramework-body-sign .sign-content-box {
+  width: 1200px;
+  height: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+.viewFramework-body-sign .sign-content-box .left-pic {
+  position: absolute;
+  top: 15%;
+  left: 150px;
+  z-index: 10;
+}
+.viewFramework-body-sign .sign-content-box .right-form {
+  width: 314px;
+  height: 294px;
+  top: 22%;
+  right: 200px;
+}
+.viewFramework-body-sign .sign-content-box .sure-button {
+  width: 284px;
+}
+.viewFramework-body-sign .sign-content-box .signin-form-container {
+  width: 636px;
+  height: 358px;
+}
+.viewFramework-body-sign .sign-content-box .signin-form-container img {
+  height: 100%;
+  float: left;
+  border-radius: 5px 0 0 5px;
+}
+.viewFramework-body-sign .sign-content-box .mail-check-container {
+  width: 586px;
+  height: 290px;
+}
+.viewFramework-body-sign .sign-content-box .mail-check-container .mail-pic {
+  height: 150px;
+  line-height: 140px;
+}
+.viewFramework-body-sign .sign-content-box .mail-check-container .mail-pic i {
+  font-size: 90px;
+  filter: alpha(opacity=80);
+  /* ie 有效*/
+  -moz-opacity: 0.8;
+  /* Firefox  有效*/
+  opacity: 0.8;
+  /* 通用，其他浏览器  有效*/
+}
+.viewFramework-body-sign .sign-content-box .mail-check-container .mail-button {
+  margin: 0 auto;
+  display: block;
+}
 .viewFramework-footer {
   position: absolute;
   bottom: 0;
@@ -221,60 +237,4 @@ body {
 }
 .sign-container .mail-form {
   width: 100%;
-}
-body {
-  background-color: #ffffff;
-}
-.viewFramework-topbar {
-  color: #fff;
-}
-.viewFramework-topbar .to-signin {
-  color: #31a9e8;
-}
-.viewFramework-body-sign {
-  position: absolute;
-  top: 66px;
-  bottom: 100px;
-  width: 100%;
-  min-width: 1200px;
-}
-.viewFramework-body-sign .sign-content-box {
-  width: 1200px;
-  height: 100%;
-  margin: 0 auto;
-  position: relative;
-}
-.viewFramework-body-sign .sign-content-box .left-pic {
-  position: absolute;
-  top: 15%;
-  left: 150px;
-  z-index: 10;
-}
-.viewFramework-body-sign .sign-content-box .right-form {
-  width: 314px;
-  height: 294px;
-  top: 22%;
-  right: 200px;
-}
-.viewFramework-body-sign .sign-content-box .sure-button {
-  width: 284px;
-}
-.viewFramework-body-sign .sign-content-box .signin-form-container {
-  width: 636px;
-  height: 358px;
-}
-.viewFramework-body-sign .sign-content-box .signin-form-container img {
-  height: 100%;
-  float: left;
-  border-radius: 5px 0 0 5px;
-}
-.viewFramework-body-sign .sign-content-box .mail-check-container {
-  width: 586px;
-  height: 260px;
-}
-.viewFramework-body-sign .sign-content-box .mail-check-container .mail-pic {
-  margin: 0 0 20px;
-}
-.viewFramework-body-sign .sign-content-box .mail-check-container .mail-button {
-  margin: 0 auto;
 }
