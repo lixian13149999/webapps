@@ -1,11 +1,12 @@
 var input = new Object();
 
+//方法引用自iverify.js
 //验证用户名是否为邮箱
 input.checkUserName = function(){
     var UserName = $("#username").val();
     var isnull = v.isNull(UserName);
-    var isemail = v.isEmail(UserName);
-    return !isnull&&isemail ? true : false ;
+    var istooshort = v.shortThan(UserName,4);
+    return isnull||istooshort ? false : true ;
 }
 //验证密码是否大于6位
 input.checkPassword = function(){
