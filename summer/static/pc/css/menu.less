@@ -8,7 +8,7 @@
     margin-top: 14px;
     padding: 0 30px 30px;
     
-    .au-role-count,.au-menu-count{
+    .au-power-count,.au-menu-count{
         display: table-cell;
 //        min-height: 
     }
@@ -20,6 +20,9 @@
         margin-bottom: 0px;
         width: 320px;
         .menu-box{
+            &:first-child{
+                border-top:0px;
+            }
             .menu{
                 .menu-title{
                     padding-left: 20px;
@@ -47,49 +50,32 @@
     }
     
     
-    .au-role-count{
+    .au-power-count{
         border: solid @line-color-light 1px;
         border-left: 0px;
         width: 700px;
     }
-    
-//<div class="au-role-box">
-//    <a href="" class="role-text">
-//        <i class="icon icon-add role-icon"></i>
-//        添加
-//    </a>
-//    <a href="" class="role-code">user:add</a>
-//    <a class="role-info">用户添加权限</a>
-//    <span class="menu-tools-cont">
-//        <a href="">
-//            <i class="icon icon-edit hover-warning"></i>
-//        </a>
-//        <a href="">
-//            <i class="icon icon-grip hover-warning"></i>
-//        </a>
-//    </span>
-//</div>    
-    
-    .au-role-box{
+        
+    .au-power-box{
         height: 35px;
         line-height: 35px;
         padding-left: 20px;
         border-bottom: solid @line-color-light 1px;
-        .role-icon{
+        .power-icon{
             margin-right: 10px;
         }
-        .role-text,.role-code,.role-info{
+        .power-text,.power-code,.power-info{
             display: inline-block;
             
         }
-        .role-text{
+        .power-text{
             min-width: 150px;
         }
-        .role-code{
+        .power-code{
             min-width: 100px;
             color: @font-color-deep;
         }
-        .role-info{
+        .power-info{
             color: @font-color-light;
             
         }
@@ -112,74 +98,61 @@
         font-size:1.1em;
         text-indent:2em;
     }
-    .modal-box{
+    .menu-modal-input{
+        width:100%;
         height:50px;
-        line-height:50px;
-        width:350px;
-        text-align:right;
+        margin-bottom:5px;
         .input-tips{
-            .modal-input-tips;
-            height:50px;
-            line-height:50px;
+            display:inline-block;
+            width:140px;
+            line-height:35px;
+            text-align:right;
+            padding-right:10px;
         }
-        .input-text{
-            .modal-input-text;
-        }
-     }
-        .chose{
+        .form-control{
             display:inline-block;
             width:200px;
-            text-align:left;
+            height:35px;
         }
-    .modal-box-exc{
-        width:350px;
-        height:90px;
-        line-height:90px;
-        text-align:right;
-        .input-tips{
-            .modal-input-tips;
-            height:90px;
-            line-height:90px;
-        }
-        .input-text{
-            .modal-input-text;
-            margin:5px 0;
-            height:80px;
-            textarea{
-                resize:none;
-            }
-            .form-control{
-                width:100%;
-                height:80px;
-            }
+        .error-msg-label {
+            display:block;
+            width:200px;
+            height:15px;
+            vertical-align:top;
+            margin-left:125px;
+            margin-top:-6px;            
+            color:#ff0000;
         }
     }
-    .error-tips{
-        height:20px;
-        line-height:20px;
-        text-indent:158px;
-        color:#ff0000;
+    .input-textarea{
+        height:70px;
+        .input-tips{
+            vertical-align:top;
+            line-height:60px;
+        }
+        .form-control{
+            width:200px;
+            height:60px;
+            resize:none;
+        }
+    }
+    .input-radio{
+        input{
+            margin:0 5px 0 10px;
+        }    
     }
     .button-box{
         width:100%;
-        margin:20px 0 30px;
+        margin:10px 0 30px;
         text-align:center;
         .modal-button{
             padding:0;
-            margin:0;
-            width:60px;
-            height:25px;
-            line-height:25px;
+            margin:0 10px;
+            width:80px;
+            height:35px;
+            line-height:35px;
             font-size:14px;
         }
-    }
-    .modal-input-tips{
-        vertical-align:top;
-        display:inline-block;
-    }
-    .modal-input-text{
-        display:inline-block;
-        width:200px;
     }
 }
     

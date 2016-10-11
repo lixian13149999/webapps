@@ -52,7 +52,7 @@ vd.toSuccess = function(label) {
 //inputType  输入框的类型(现有两个,1.default/2.beaut)
 //hasMsg  是否弹出提示信息(1.弹出,2.不弹出)
 vd.init = function(eleId, inputType, hasMsg) {
-    //	console.log("进入验证初始化");
+    console.log("进入验证初始化"+eleId);
     $("#" + eleId).validate({
         debug: true, //调试模式取消submit的默认提交功能   
         errorClass: "label.error-msg-label", //默认为错误的样式类为：error   
@@ -126,6 +126,21 @@ vd.init = function(eleId, inputType, hasMsg) {
 //                        }
 //                    }
 //                }
+            },
+            menuName:{
+                required: true
+            },
+            menuIcon:{
+                required: true
+            },
+            menuPermission:{
+                required: true
+            },
+            menuHref:{
+                required: true
+            },
+            menuDscription:{
+                required: true
             }
         },
         messages: {
@@ -157,6 +172,21 @@ vd.init = function(eleId, inputType, hasMsg) {
                 email: "请输入正确的邮箱"
 //                	,
 //                remote:"此邮箱已经被绑定,请重新输入"
+            },
+            menuName:{
+                required: "栏目名称不能为空"
+            },
+            menuIcon:{
+                required: "栏目图标不能为空"
+            },
+            menuPermission:{
+                required: "栏目权限标识不能为空"
+            },
+            menuHref:{
+                required: "栏目连接地址不能为空"
+            },
+            menuDscription:{
+                required: "栏目简介不能为空"
             }
         }
     });
