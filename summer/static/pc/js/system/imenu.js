@@ -79,10 +79,11 @@ $(document).ready(function() {
  * 用于模态框的初始化
  */
 imenu.clearMenuModal = function () {
-	$('#addMenuModal .form-control').val('');
-    $('#addMenuModal .error-msg-label').html('');
+    $('#addMenuModal .page-form').removeClass('has-error');//添加模态框错误样式（红色边框）清除
+	$('#addMenuModal .form-control').val('');//添加模态框的输入框内容清空
+    $('#addMenuModal .error-msg-label').html('');//添加模态框错误提示内容清空
     $('.input-radio :radio').removeAttr('checked');
-    $('.input-radio input:eq(0)').prop('checked',true);
+    $('.input-radio input:eq(0)').prop('checked',true);//添加模态框初始化显示为是
 }
 
 /**
@@ -203,9 +204,6 @@ imenu.openMenuModal = function(){
             
             $('#addMenuModal').modal('toggle');
         }
-
-
-         
     })
 }
 
@@ -213,42 +211,46 @@ imenu.addOrEditMenu = function () {
 	// console.log("进入提交方法");
 
     //1. 获取并封装模态框中输入框的内容
-	var menu = iutil.parseValue({
-        id:"#foreground_or_back",
-        name:"foregroundOrBack"
-    },{
-		id:"#menu_id",
-		name:"id"
-	},{
-        id:"#menu_laver",
-        name:"laver"
-    },{
-        id:"#menu_parent_id",
-        name:"parentId"
-    },{
-        id:"#menu_sort",
-        name:"sort"
-    },{
-        id:"#menu_name",
-        name:"name"
-    },{
-        id:"#menu_icon",
-        name:"icon"
-    },{
-        id:"#menu_permission",
-        name:"permission"
-    },{
-        id:"#menu_href",
-        name:"href"
-    },{
-		id:"#menu_description",
-		name:"description"
-	});
-	
-    var isShow = $("input[name='isShow']:checked").val();
-    menu.isShow = isShow;
+	// var menu = iutil.parseValue({
+ //        id:"#foreground_or_back",
+ //        name:"foregroundOrBack"
+ //    },{
+	// 	id:"#menu_id",
+	// 	name:"id"
+	// },{
+ //        id:"#menu_laver",
+ //        name:"laver"
+ //    },{
+ //        id:"#menu_parent_id",
+ //        name:"parentId"
+ //    },{
+ //        id:"#menu_sort",
+ //        name:"sort"
+ //    },{
+ //        id:"#menu_name",
+ //        name:"name"
+ //    },{
+ //        id:"#menu_icon",
+ //        name:"icon"
+ //    },{
+ //        id:"#menu_permission",
+ //        name:"permission"
+ //    },{
+ //        id:"#menu_href",
+ //        name:"href"
+ //    },{
+	// 	id:"#menu_description",
+	// 	name:"description"
+	// });
 
-    var willTodo = $("#menu_will_todo").val();
+    var menu = iform.parse("menu_modal_form");
+    // console.log(menu);
+	
+    // var isShow = $("input[name='isShow']:checked").val();
+    // menu.isShow = isShow;
+
+    var willTodo = menu.willTodo;
+    // console.log(willTodo);
 	var url;
 	if(willTodo==="1"){
 		url="menu/add";
